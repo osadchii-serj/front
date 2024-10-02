@@ -70,3 +70,20 @@ class IProduct(ABC):
 
 
 # ========================================================================================================================
+
+
+@dataclass
+class IWarehouse(ABC):
+
+    warehouse = {}
+
+    @abstractmethod
+    def add_product(self, product):
+        pass
+
+    @abstractmethod
+    def remove_product(self, product):
+        pass
+
+
+# ========================================================================================================================
