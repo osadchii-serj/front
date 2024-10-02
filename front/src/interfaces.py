@@ -52,3 +52,21 @@ class IUser(ABC):
 
 
 # ========================================================================================================================
+
+
+@dataclass
+class IProduct(ABC):
+
+    product_name: str = None
+    product_description: str = None
+    product_price: float = 0
+
+    product_stock_quantity = None
+    product_id = None
+
+    @abstractmethod
+    def update_stock(self, product: Dict[str]):
+        pass
+
+
+# ========================================================================================================================
