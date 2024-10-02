@@ -126,3 +126,25 @@ class IPayment(ABC):
 
 
 # ========================================================================================================================
+
+
+@dataclass
+class IDelivery(ABC):
+
+    address: str = None
+
+    delivery_id = None
+    order_id = None
+    delivery_date = None
+    status = None
+
+    @abstractmethod
+    def schedule_delivery(self):
+        pass
+
+    @abstractmethod
+    def update_status(self, new_status):
+        pass
+
+
+# ========================================================================================================================
