@@ -4,4 +4,6 @@ from interfaces import IUser
 
 
 class User(IUser):
-    pass
+
+    def create_user_id(self):
+        self.user_id = id(self)
