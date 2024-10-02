@@ -109,3 +109,20 @@ class IOrder(ABC):
 
 
 # ========================================================================================================================
+
+
+@dataclass
+class IPayment(ABC):
+
+    payment_id = None
+    order_id = None
+    amount = 0
+    payment_method = None
+    status = None
+
+    @abstractmethod
+    def process_payment(self):
+        pass
+
+
+# ========================================================================================================================
