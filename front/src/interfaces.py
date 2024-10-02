@@ -87,3 +87,25 @@ class IWarehouse(ABC):
 
 
 # ========================================================================================================================
+
+
+@dataclass
+class IOrder(ABC):
+
+    products: List[object]
+
+    order_id = None
+    user_id = None
+    total_amount = 0
+    status = None
+
+    @abstractmethod
+    def calculate_total(self):
+        pass
+
+    @abstractmethod
+    def update_status(self):
+        pass
+
+
+# ========================================================================================================================
