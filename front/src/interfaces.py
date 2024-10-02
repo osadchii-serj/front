@@ -42,5 +42,13 @@ class IUser(ABC):
     def add_product_cart(self, product):
         pass
 
+    @abstractmethod
+    def remove_product_cart(self, product):
+        pass
+
+    @abstractmethod
+    def checkout(self):
+        pass
+
 
 # ========================================================================================================================
