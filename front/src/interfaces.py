@@ -27,6 +27,12 @@ class IUsersBase(ABC):
 @dataclass
 class IUser(ABC):
 
+    user_name: str
+    user_email: str
+    user_password: str
+    user_id = None
+    cart = []
+
     @abstractmethod
     def create_user_id(self):
         pass
