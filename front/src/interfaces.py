@@ -56,8 +56,17 @@ class IUser(ABC):
 @dataclass
 class IProduct(ABC):
 
+    product_name: str
+    product_price: float
+
+    product_id = None
+
     @abstractmethod
-    def update_stock(self, product: object):
+    def create_product(self):
+        pass
+
+    @abstractmethod
+    def create_product_id(self):
         pass
 
 
