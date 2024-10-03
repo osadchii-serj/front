@@ -5,12 +5,11 @@ from dataclasses import dataclass
 from typing import Dict, List
 
 
+@dataclass
 class IUsersBase(ABC):
 
-    users_base: Dict[str] = {}
-
     @abstractmethod
-    def add_user(self, user: Dict[str]):
+    def add_user(self, user: Dict):
         pass
 
     @abstractmethod
@@ -27,12 +26,6 @@ class IUsersBase(ABC):
 
 @dataclass
 class IUser(ABC):
-
-    user_name: str = None
-    user_email: str = None
-    user_password: str = None
-    user_id = None
-    user_cart = []
 
     @abstractmethod
     def create_user_id(self):
@@ -57,15 +50,8 @@ class IUser(ABC):
 @dataclass
 class IProduct(ABC):
 
-    product_name: str = None
-    product_description: str = None
-    product_price: float = 0
-
-    product_stock_quantity = None
-    product_id = None
-
     @abstractmethod
-    def update_stock(self, product: Dict[str]):
+    def update_stock(self, product: object):
         pass
 
 
@@ -92,13 +78,6 @@ class IWarehouse(ABC):
 @dataclass
 class IOrder(ABC):
 
-    products: List[object]
-
-    order_id = None
-    user_id = None
-    total_amount = 0
-    status = None
-
     @abstractmethod
     def calculate_total(self):
         pass
@@ -114,12 +93,6 @@ class IOrder(ABC):
 @dataclass
 class IPayment(ABC):
 
-    payment_id = None
-    order_id = None
-    amount = 0
-    payment_method = None
-    status = None
-
     @abstractmethod
     def process_payment(self):
         pass
@@ -130,13 +103,6 @@ class IPayment(ABC):
 
 @dataclass
 class IDelivery(ABC):
-
-    address: str = None
-
-    delivery_id = None
-    order_id = None
-    delivery_date = None
-    status = None
 
     @abstractmethod
     def schedule_delivery(self):

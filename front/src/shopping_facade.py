@@ -11,16 +11,4 @@ from user import User
 
 @dataclass
 class ShoppingFacade:
-
-    user_name: str = None
-    user_email: str = None
-    user_password: str = None
-
-    warehouse_service = Warehouse
-    users_base_service = UsersBase
-    payment_service = Payment
-    product_service = Product
-    delivery_service = Delivery
-    order_service = Order
-    user_service = User
-
+    pass
