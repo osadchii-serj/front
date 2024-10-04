@@ -1,5 +1,3 @@
-from warehouse import Warehouse
-
 from dataclasses import dataclass
 
 from interfaces import IProduct
