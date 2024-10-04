@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 from interfaces import IPayment
 
-from order import Order
 
 from typing import List
 
@@ -21,7 +20,7 @@ class Payment(IPayment):
     def create_payment_id(self):
         self.payment_id = id(self)
 
-    def add_order(self, order: Order):
+    def add_order(self, order: object):
         self.order = order
 
     def calculate(self, list_prices: List[int | float]):

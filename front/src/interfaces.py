@@ -31,6 +31,8 @@ class IUser(ABC):
     user_email: str
     user_password: str
     user_id = None
+    payment_system = None
+    balance = 0
     cart = []
 
     @abstractmethod
@@ -94,11 +96,7 @@ class IWarehouse(ABC):
 class IOrder(ABC):
 
     @abstractmethod
-    def calculate_total(self):
-        pass
-
-    @abstractmethod
-    def update_status(self):
+    def create_order(self):
         pass
 
 
