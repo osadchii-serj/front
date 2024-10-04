@@ -3,5 +3,20 @@ from dataclasses import dataclass
 from interfaces import IDelivery
 
 
+@dataclass
 class Delivery(IDelivery):
-    pass
+
+    address: str
+    price: int | float
+    status = False
+
+    def delivery(self):
+        if self.address and self.price:
+            self.status = True
+            return self.address, self.price, self.status
+        return self.status
+
+
+if __name__ == "__main__":
+    delivery = Delivery("Moscow, Krasnoarmeyskaya 23", 100)
+    print(delivery.delivery())

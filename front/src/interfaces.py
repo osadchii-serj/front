@@ -120,11 +120,7 @@ class IPayment(ABC):
 class IDelivery(ABC):
 
     @abstractmethod
-    def schedule_delivery(self):
-        pass
-
-    @abstractmethod
-    def update_status(self, new_status):
+    def delivery(self):
         pass
 
 
