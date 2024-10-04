@@ -28,6 +28,9 @@ class Warehouse(IWarehouse):
         if product.name in self.warehouse:
             return len(self.warehouse[product.name])
 
+    def get_products(self, product, quantity):
+        return self.warehouse[product.name][0:quantity]
+
 
 if __name__ == "__main__":
     warehouse = Warehouse()
@@ -44,3 +47,4 @@ if __name__ == "__main__":
     print(warehouse.count_products(phone))
     warehouse.remove_product(TV)
     print(warehouse.warehouse)
+    print(warehouse.get_products(phone, 2))
