@@ -11,7 +11,6 @@ class User(IUser):
     def add_product_cart(self, product):
         if product:
             self.cart.append(product)
-            return f"{product} добавлен в корзину"
 
     def add_money(self, sum_money: int | float):
         self.balance = sum_money
@@ -19,16 +18,12 @@ class User(IUser):
     def add_payment_system(self, payment_system: str):
         self.payment_system = payment_system
 
-    def checkout(self):
-        return super().checkout()
-
     def remove_product_cart(self, product):
         if product and product in self.cart:
             self.cart.remove(product)
-            return f"{product} удалён из корзины"
 
     def create_user_id(self):
-        self.user_id = id(self)
+        self.user_id = id(f"{self}")
 
 
 if __name__ == "__main__":

@@ -28,7 +28,7 @@ class Warehouse(IWarehouse):
         if product.name in self.warehouse:
             return len(self.warehouse[product.name])
 
-    def get_products(self, product, quantity):
+    def get_products(self, product, quantity: int):
         return self.warehouse[product.name][0:quantity]
 
 

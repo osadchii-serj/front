@@ -7,11 +7,11 @@ from interfaces import IDelivery
 class Delivery(IDelivery):
 
     address: str
-    price: int | float
     status = False
+    price = .100
 
     def delivery(self):
-        if self.address and self.price:
+        if self.address:
             self.status = True
             return self.address, self.price, self.status
         return self.status
