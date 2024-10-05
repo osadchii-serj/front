@@ -8,11 +8,16 @@ from delivery import Delivery
 from order import Order
 from user import User
 
+from logger import ShopLogger
+
+
 from pprint import pprint
 
 
 @dataclass
 class ShoppingFacade:
+
+    logger = ShopLogger("ShopLogger")
 
     user = None
     product = None
@@ -24,9 +29,11 @@ class ShoppingFacade:
     def create_product(self, product_name: str, product_price: int | float):
         product = Product(product_name, product_price)
         self.product = product.create_product()
+        self.logger.log_info(f"Создан продукт: {product}")
 
     def send_product_warehouse(self):
         self.warehouse.add_product(self.product)
+        self.logger.log_info(f"{self.product} - отправлен на склад")
 
     def count_product_warehouse(self):
         return self.warehouse.count_products(self.product)
@@ -36,18 +43,22 @@ class ShoppingFacade:
 
     def remove_product_warehouse(self):
         self.warehouse.remove_product(self.product)
+        self.logger.log_info(f"Продукт: {self.product} удалён со склада")
 
     def create_user(self, name_user: str, email_user: str, password_user: str):
         self.user = User(name_user, email_user, password_user)
+        self.logger.log_info(f"Создан пользователь: {self.user}")
 
     def user_remove_product_cart(self, product: Product):
         self.user.remove_product_cart(product)
 
     def user_base_add_user(self):
         self.users_base.add_user(self.user)
+        self.logger.log_info(f"Пользователь: {self.user} добавлен в базу {self.users_base}")
 
     def order_add_user(self):
         self.order.add_user(self.user)
+        self.logger.log_info(f"Создан заказ пользователь: {self.user.user_name}")
 
     def order_add_user_id(self):
         self.order.add_user_id(self.user.user_id)
@@ -120,4 +131,4 @@ if __name__ == "__main__":
     shop.order.create_order()
     shop.create_payment()
     shop.payment.payment_receipt()
-    print(shop.user.balance)
+    print("Баланс: ", shop.user.balance)
