@@ -39,6 +39,7 @@ class Order(IOrder):
         self.payment = payment
 
     def add_user(self, user):
+        self.create_order_id()
         self.user = user
 
     def calculate_amount(self):

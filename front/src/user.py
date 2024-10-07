@@ -22,8 +22,8 @@ class User(IUser):
         if product and product in self.cart:
             self.cart.remove(product)
 
-    def create_user_id(self):
-        self.user_id = id(f"{self}")
+    def create_user_id(self, user):
+        self.user_id = id(user)
 
 
 if __name__ == "__main__":

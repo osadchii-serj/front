@@ -3,9 +3,6 @@ from dataclasses import dataclass
 from interfaces import IPayment
 
 
-from typing import List
-
-
 @dataclass
 class Payment(IPayment):
 

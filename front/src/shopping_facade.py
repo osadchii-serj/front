@@ -29,17 +29,19 @@ class ShoppingFacade:
     def create_product(self, product_name: str, product_price: int | float):
         product = Product(product_name, product_price)
         self.product = product.create_product()
-        self.logger.log_info(f"Создан продукт: {product}")
+        self.logger.log_info(f"Создан продукт: {product.product_name}")
 
     def send_product_warehouse(self):
         self.warehouse.add_product(self.product)
-        self.logger.log_info(f"{self.product} - отправлен на склад")
+        self.logger.log_info(f"{self.product.name} - отправлен на склад {self.warehouse.warehouse}")
 
     def count_product_warehouse(self):
-        return self.warehouse.count_products(self.product)
+        counter_product = self.warehouse.count_products(self.product)
+        self.logger.log_info(f"Количество: {self.product.name} на складе {counter_product}")
 
     def get_product_warehouse(self, quantity: int):
-        return self.warehouse.get_products(self.product, quantity)
+        product = self.warehouse.get_products(self.product, quantity)
+        self.logger.log_info(f"Получен продукт со склада: {product}")
 
     def remove_product_warehouse(self):
         self.warehouse.remove_product(self.product)
@@ -47,10 +49,15 @@ class ShoppingFacade:
 
     def create_user(self, name_user: str, email_user: str, password_user: str):
         self.user = User(name_user, email_user, password_user)
-        self.logger.log_info(f"Создан пользователь: {self.user}")
+        self.user.create_user_id(self.user)
+        self.logger.log_info(f"Создан пользователь: {self.user.user_name}")
+        self.logger.log_info(f"Email: {self.user.user_email}")
+        self.logger.log_info(f"Password: {self.user.user_password}")
+        self.logger.log_info(f"user_id: {self.user.user_id}")
 
     def user_remove_product_cart(self, product: Product):
         self.user.remove_product_cart(product)
+        self.logger.log_info(f"Продукт: {self.product} удалён из корзины")
 
     def user_base_add_user(self):
         self.users_base.add_user(self.user)
@@ -58,13 +65,14 @@ class ShoppingFacade:
 
     def order_add_user(self):
         self.order.add_user(self.user)
-        self.logger.log_info(f"Создан заказ пользователь: {self.user.user_name}")
+        self.logger.log_info(f"Создан заказ № {self.order.order_id} - пользователь: {self.user.user_name}")
 
     def order_add_user_id(self):
         self.order.add_user_id(self.user.user_id)
 
     def order_add_products(self):
         self.order.add_products(self.user.cart)
+        self.logger.log_info(f"Продукт {self.product} добавлен в заказ")
 
     def order_add_amount_products(self):
         amount = 0
@@ -77,6 +85,7 @@ class ShoppingFacade:
         if address.delivery():
             self.order.delivery = address.address
             self.order.delivery_price = address.price
+            self.logger.log_info(f"Адрес - {self.order.delivery}")
 
     def create_payment(self):
         self.payment.payment_system = self.user.payment_system
@@ -86,7 +95,7 @@ class ShoppingFacade:
         self.payment.process_payment()
         if self.payment.status:
             self.user.balance = self.user.balance - self.order.calculate_amount()
-            print("Успешный платёж")
+            self.logger.log_info(f"Сума заказа: {self.order.amount}")
         else:
             print("Недостаточно средств")
 
